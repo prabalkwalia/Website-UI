@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Resume</title>
+    <title>Prabal Kumar Walia | Resume</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* === Purely Dark Mode & Premium Aesthetic Variables === */
+        /* === Purely Dark Mode & Liquid Glass Aesthetic Variables === */
         :root {
             --bg-color: #000000;
             --text-main: #f5f5f7;
             --text-muted: #a1a1a6;
-            --accent: #2997ff;
-            --accent-glow: rgba(41, 151, 255, 0.3);
+            
+            /* UI Gradients matching the uploaded banner */
+            --accent-magenta: #ff3399;
+            --accent-purple: #9b4dff;
+            --accent-orange: #ff9933;
+            --accent-glow: rgba(255, 51, 153, 0.3);
+            --ui-gradient: linear-gradient(90deg, var(--accent-purple), var(--accent-magenta), var(--accent-orange), var(--accent-purple));
+            
             --card-bg: rgba(28, 28, 30, 0.6);
             --card-border: rgba(255, 255, 255, 0.08);
-            /* Liquid Glass Colors - Rich Nebula tones inspired by your image */
-            --orb-purple: radial-gradient(circle, rgba(100,0,150,0.4) 0%, rgba(0,0,0,0) 80%);
-            --orb-magenta: radial-gradient(circle, rgba(180,50,180,0.3) 0%, rgba(0,0,0,0) 80%);
-            --orb-orange: radial-gradient(circle, rgba(200,100,50,0.2) 0%, rgba(0,0,0,0) 80%);
+            
+            /* Liquid Glass Background Colors */
+            --orb-purple: radial-gradient(circle, rgba(155, 77, 255, 0.3) 0%, rgba(0,0,0,0) 80%);
+            --orb-magenta: radial-gradient(circle, rgba(255, 51, 153, 0.25) 0%, rgba(0,0,0,0) 80%);
+            --orb-orange: radial-gradient(circle, rgba(255, 153, 51, 0.15) 0%, rgba(0,0,0,0) 80%);
         }
 
         * {
@@ -45,13 +52,12 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -2; /* Even deeper than before */
+            z-index: -2; 
             overflow: hidden;
             pointer-events: none;
             background: #000;
         }
 
-        /* Add a deep blur/frost overlay right behind everything */
         .bg-frost {
             position: fixed;
             top: 0;
@@ -68,7 +74,7 @@
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px); /* Deep blur for diffuse nebula effect */
+            filter: blur(80px);
             opacity: 0.8;
             animation: slowFluidFlow 40s infinite ease-in-out alternate;
         }
@@ -100,7 +106,7 @@
             padding: 20px;
         }
 
-        /* === New Banner-Enabled Header Section === */
+        /* === Banner-Enabled Header Section === */
         header {
             position: relative;
             width: 100%;
@@ -109,55 +115,50 @@
             margin-top: 20px;
             opacity: 0;
             animation: fadeUp 1s ease 0.2s forwards;
-            overflow: hidden; /* Important: keeps banner from leaking out */
+            overflow: hidden;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
-        /* Dynamic Liquid Banner Container & Image */
         .liquid-banner {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0; /* Behind text, but in the header */
+            z-index: 0;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--card-bg); /* Placeholder background */
+            background: var(--card-bg);
         }
 
         .liquid-banner img {
             width: 100%;
             height: auto;
-            object-fit: contain; /* Keeps its organic shape */
-            opacity: 0.8; /* Subtle transparency for glass integration */
-            /* === Loop UPWARDS drift animation === */
+            object-fit: contain;
+            opacity: 0.85;
             animation: loopingUpdrift 25s infinite ease-in-out alternate;
         }
 
         @keyframes loopingUpdrift {
-            0% { transform: translateY(15%) scale(1.05); } /* Start slightly below */
-            50% { transform: translateY(0%) scale(1); } /* Float to center */
-            100% { transform: translateY(-15%) scale(1.05); } /* Float upward */
+            0% { transform: translateY(15%) scale(1.05); }
+            50% { transform: translateY(0%) scale(1); }
+            100% { transform: translateY(-15%) scale(1.05); }
         }
 
-        /* Standard placeholder text for banner if image is missing */
         .banner-placeholder-text {
             color: var(--text-muted);
             font-size: 14px;
             padding: 50px 0;
-            z-index: 1; /* Make visible until image loads */
+            z-index: 1;
         }
 
-        /* Style the header content container (the text block) */
         .header-content {
             position: relative;
-            z-index: 10; /* Make text sit OVER the banner image */
-            padding: 40px 20px 20px 20px; /* Adjust padding for dynamic move */
-            /* Add pointer-events: none; only if you want no hover interaction on text */
+            z-index: 10;
+            padding: 40px 20px 20px 20px;
         }
 
         .profile-img {
@@ -165,17 +166,30 @@
             height: 130px;
             border-radius: 50%;
             background: var(--card-bg);
-            border: 2px solid var(--card-border);
+            /* Profile border uses the gradient */
+            padding: 3px;
+            background: var(--ui-gradient);
+            background-size: 300% auto;
+            animation: shine 6s linear infinite;
             margin: 0 auto 24px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-muted);
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px var(--accent-glow);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            /* Important: profile pic should allow hover/pointer events */
             pointer-events: auto;
+        }
+
+        .profile-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
         }
 
         .profile-img:hover {
@@ -193,59 +207,56 @@
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 8px;
-            /* Subtle Iridescent/Shine effect for text */
-            background: linear-gradient(90deg, #fff, var(--accent));
+            /* Header text uses the liquid glass gradient */
+            background: var(--ui-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: shine 5s linear infinite;
+            background-size: 300% auto;
+            animation: shine 6s linear infinite;
         }
 
         @keyframes shine {
-            to { background-position: 200% center; }
+            to { background-position: 300% center; }
         }
 
         .subtitle {
             font-size: 22px;
-            color: var(--text-main); /* Pop on dark banner */
+            color: var(--text-main);
             font-weight: 400;
             margin-bottom: 24px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Helps text pop over banner */
         }
 
-        /* === Social Links (Moved to Top) with Icons === */
+        /* === Social Links === */
         .social-links {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: 0px; /* Reduced to align with subtitle spacing */
-            flex-wrap: wrap; /* Important for mobile */
-            pointer-events: auto; /* Ensure links are clickable */
+            margin-top: 0px;
+            flex-wrap: wrap;
+            pointer-events: auto;
         }
 
         .social-links a {
-            color: #fff; /* High visibility links over dark banner */
+            color: #fff;
             text-decoration: none;
             font-weight: 600;
             padding: 8px 16px;
             border-radius: 20px;
             background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--card-border);
             transition: all 0.3s;
             font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 8px; /* Gap between icon and text */
+            gap: 8px;
         }
         
-        /* Unique Icons & Hover State for each brand, designed for Dark Mode */
-        .social-links a.mail:hover { background: #dd4b39; color: white; border-color: #dd4b39; }
-        .social-links a.insta:hover { background: #e4405f; color: white; border-color: #e4405f; }
-        /* X and Threads are generally black/white, standard accent works */
-        .social-links a.x:hover, .social-links a.threads:hover {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-        }
+        .social-links a.mail:hover { background: #dd4b39; border-color: #dd4b39; }
+        .social-links a.insta:hover { background: #e4405f; border-color: #e4405f; }
+        .social-links a.x:hover { background: #1da1f2; border-color: #1da1f2; }
+        .social-links a.threads:hover { background: #fff; color: #000; border-color: #fff; }
 
         .social-links a:hover {
             transform: translateY(-3px);
@@ -289,7 +300,7 @@
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px var(--accent-glow);
-            border-color: var(--accent);
+            border-color: var(--accent-magenta);
         }
 
         .card-header {
@@ -306,13 +317,15 @@
             font-weight: 600;
         }
 
+        /* Dates use the gradient style */
         .card-date {
             font-size: 14px;
-            color: var(--accent);
+            color: #fff;
             font-weight: 500;
-            background: var(--accent-glow);
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-magenta));
             padding: 4px 12px;
             border-radius: 20px;
+            box-shadow: 0 4px 10px var(--accent-glow);
         }
 
         .skills-grid {
@@ -336,7 +349,7 @@
             content: "→";
             position: absolute;
             left: 0;
-            color: var(--accent);
+            color: var(--accent-magenta);
             font-weight: bold;
         }
 
@@ -382,22 +395,24 @@
 
         <div class="header-content">
             <div class="profile-img">
-                [Photo]
+                <div class="profile-inner">
+                    [Photo]
+                </div>
             </div>
-            <h1>Your Name</h1>
+            <h1>Prabal Kumar Walia</h1>
             <p class="subtitle">Medical Student & Developer</p>
             
             <div class="social-links">
-                <a href="mailto:your.email@email.com" class="mail">
+                <a href="mailto:contact@prabalkwalia.in" class="mail">
                     <i class="fas fa-envelope"></i> Mail
                 </a>
-                <a href="https://instagram.com/yourhandle" target="_blank" class="insta">
+                <a href="https://instagram.com/prabalkwalia" target="_blank" class="insta">
                     <i class="fab fa-instagram"></i> Instagram
                 </a>
-                <a href="https://x.com/yourhandle" target="_blank" class="x">
+                <a href="https://x.com/prabalkwalia" target="_blank" class="x">
                     <i class="fab fa-x-twitter"></i> X
                 </a>
-                <a href="https://threads.net/@yourhandle" target="_blank" class="threads">
+                <a href="https://threads.net/@prabalkwalia" target="_blank" class="threads">
                     <i class="fab fa-threads"></i> Threads
                 </a>
             </div>
@@ -472,18 +487,17 @@
     </section>
 
     <footer class="reveal">
-        <p>Live long and prosper 🖖 • Designed in Dehradun, Built for the Web.</p>
+        <p>Copyright &copy; Prabal Kumar Walia<br>2026 [India]</p>
     </footer>
 </div>
 
 <script>
-    // Scroll Reveal Animation Logic
     function reveal() {
         var reveals = document.querySelectorAll(".reveal");
         for (var i = 0; i < reveals.length; i++) {
             var windowHeight = window.innerHeight;
             var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 100; // when to trigger the animation
+            var elementVisible = 100;
 
             if (elementTop < windowHeight - elementVisible) {
                 reveals[i].classList.add("active");
@@ -492,7 +506,6 @@
     }
 
     window.addEventListener("scroll", reveal);
-    // Trigger once on load to show elements already in viewport
     reveal();
 </script>
 
