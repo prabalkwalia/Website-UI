@@ -154,6 +154,23 @@
             animation: shine 6s linear infinite;
         }
 
+        /* === New Glowing Greeting === */
+        .greeting {
+            font-size: 28px;
+            font-weight: 600;
+            margin-top: -12px; /* Adjust spacing with name */
+            margin-bottom: 8px;
+            color: #fff;
+            /* Apply background gradient and text-fill for visual consistency with h1 */
+            background: var(--ui-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% auto;
+            /* Make it glow subtly on a new line */
+            text-shadow: 0 0 10px var(--accent-glow);
+            animation: shine 6s linear infinite;
+        }
+
         @keyframes shine {
             to { background-position: 300% center; }
         }
@@ -255,6 +272,7 @@
             font-weight: 600;
         }
 
+        /* Dates use the gradient style */
         .card-date {
             font-size: 14px;
             color: #fff;
@@ -314,6 +332,7 @@
             .skills-grid { grid-template-columns: 1fr; }
             .card-header { flex-direction: column; gap: 8px; }
             h1 { font-size: 38px; }
+            .greeting { font-size: 24px; }
             .social-links { gap: 10px; }
             .social-links a { font-size: 14px; padding: 8px 16px; }
         }
@@ -337,6 +356,7 @@
             </div>
         </div>
         <h1>Prabal Kumar Walia</h1>
+        <div class="greeting">Hi ! 👋</div>
         <p class="subtitle">Medical Student & Developer</p>
         
         <div class="social-links">
@@ -360,7 +380,7 @@
             <h2>About Me</h2>
             <div class="card">
                 <p style="color: var(--text-muted); font-size: 16px; line-height: 1.7;">
-                    I am currently a 3rd-year MBBS student at HIMS, Dehradun, successfully bridging the gap between clinical medicine and modern technology. I am deeply passionate about the nuances of pathology and patient care, while simultaneously cultivating my skills in web development. Whether I am analyzing clinical data or building clean, user-centric digital experiences, my focus remains on delivering elegant solutions to complex problems.
+                    I am currently a 3rd-year MBBS student at HIMS, Dehradun, successfully bridging the gap between clinical medicine and modern technology. I am deeply passionate about the nuances of pathology and patient care, while simultaneously cultivating my skills in web development and the Apple ecosystem. Whether I am analyzing clinical data or building clean, user-centric digital experiences, my focus remains on delivering elegant solutions to complex problems.
                 </p>
             </div>
         </section>
@@ -375,19 +395,8 @@
                 </div>
                 <ul>
                     <li><strong>Himalayan Institute of Medical Sciences (HIMS)</strong>, Jolly Grant, Dehradun-248140.</li>
-                    <li><strong>Pre & Para-Clinical Subjects Covered:</strong> Anatomy, Physiology, Biochemistry, Pathology, Pharmacology and Microbiology.</li>
-                    <li><strong>Current Focus:</strong> Community Medicine (PSM), Forensic Medicine & Toxicology (FMT), ENT, Opthalmology and ongoing clinical ward postings.</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">High School Education</span>
-                    <span class="card-date">Completed</span>
-                </div>
-                <ul>
-                    <li><strong>St. Jude's School</strong>, Dehradun.</li>
-                    <li>Developed a strong foundation in the sciences, fostering my dual passion for healthcare and technology.</li>
+                    <li><strong>Pre & Para-Clinical Subjects Covered:</strong> Anatomy, Physiology, Biochemistry, Pathology, Pharmacology, Microbiology, and Forensic Medicine & Toxicology (FMT).</li>
+                    <li><strong>Current Focus:</strong> Community Medicine (PSM), Ophthalmology, ENT, and ongoing clinical ward postings.</li>
                 </ul>
             </div>
         </section>
@@ -403,7 +412,7 @@
                     <li>Learned core UI/UX design principles alongside various scripting languages to build dynamic user interfaces.</li>
                     <li>Designed and developed multiple websites, including this responsive personal portfolio, utilizing VS Code.</li>
                     <li>Successfully deployed web projects via GitHub Pages and other hosting platforms.</li>
-                    <li>Focused on implementing premium, Apple-inspired "Liquid Glass" aesthetics with fluid animations and complex CSS gradients.</li>
+                    <li>Focused on implementing premium, Apple-inspired 'Liquid Glass' aesthetics with fluid animations and complex CSS gradients.</li>
                 </ul>
             </div>
         </section>
