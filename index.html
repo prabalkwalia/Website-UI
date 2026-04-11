@@ -1,33 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Name | Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* === CSS Variables for Theming === */
+        /* === Purely Dark Mode & Premium Aesthetic Variables === */
         :root {
-            --bg-color: #f5f5f7;
-            --text-main: #1d1d1f;
-            --text-muted: #86868b;
-            --accent: #0066cc;
-            --accent-glow: rgba(0, 102, 204, 0.3);
-            --card-bg: rgba(255, 255, 255, 0.6);
-            --card-border: rgba(255, 255, 255, 0.8);
-            --orb-1: #ffb6ff;
-            --orb-2: #b3d4ff;
-        }
-
-        [data-theme="dark"] {
             --bg-color: #000000;
             --text-main: #f5f5f7;
             --text-muted: #a1a1a6;
             --accent: #2997ff;
             --accent-glow: rgba(41, 151, 255, 0.3);
-            --card-bg: rgba(28, 28, 30, 0.5);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --orb-1: #3a005c;
-            --orb-2: #002d66;
+            --card-bg: rgba(28, 28, 30, 0.6);
+            --card-border: rgba(255, 255, 255, 0.08);
+            /* Liquid Glass Colors - Rich Nebula tones inspired by your image */
+            --orb-purple: radial-gradient(circle, rgba(100,0,150,0.4) 0%, rgba(0,0,0,0) 80%);
+            --orb-magenta: radial-gradient(circle, rgba(180,50,180,0.3) 0%, rgba(0,0,0,0) 80%);
+            --orb-orange: radial-gradient(circle, rgba(200,100,50,0.2) 0%, rgba(0,0,0,0) 80%);
         }
 
         * {
@@ -47,83 +38,126 @@
             position: relative;
         }
 
-        /* === Animated Background Orbs === */
+        /* === Highly Diffuse & Fluid Liquid Glass Background === */
         .bg-orbs {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1;
+            z-index: -2; /* Even deeper than before */
             overflow: hidden;
             pointer-events: none;
+            background: #000;
+        }
+
+        /* Add a deep blur/frost overlay right behind everything */
+        .bg-frost {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            backdrop-filter: blur(100px);
+            -webkit-backdrop-filter: blur(100px);
+            opacity: 0.8;
         }
 
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            animation: float 20s infinite ease-in-out alternate;
+            filter: blur(80px); /* Deep blur for diffuse nebula effect */
+            opacity: 0.8;
+            animation: slowFluidFlow 40s infinite ease-in-out alternate;
         }
 
         .orb:nth-child(1) {
-            top: -10%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: var(--orb-1);
+            top: -30%; left: -30%; width: 100vw; height: 100vw; background: var(--orb-purple);
         }
 
         .orb:nth-child(2) {
-            bottom: -10%;
-            right: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: var(--orb-2);
-            animation-delay: -10s;
+            bottom: -30%; right: -30%; width: 110vw; height: 110vw; background: var(--orb-magenta);
+            animation-delay: -15s;
+        }
+        
+        .orb:nth-child(3) {
+            top: 40%; left: 30%; width: 70vw; height: 70vw; background: var(--orb-orange);
+            animation-delay: -30s;
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(10%, 15%) scale(1.2); }
+        @keyframes slowFluidFlow {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(5%, 10%) scale(1.05) rotate(5deg); }
+            100% { transform: translate(-3%, 8%) scale(1) rotate(-3deg); }
         }
 
         /* === Layout === */
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 20px;
         }
 
-        /* === Theme Toggle Button === */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            color: var(--text-main);
-            padding: 10px 16px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.05);
-        }
-
-        /* === Header === */
+        /* === New Banner-Enabled Header Section === */
         header {
+            position: relative;
+            width: 100%;
             text-align: center;
             margin-bottom: 70px;
+            margin-top: 20px;
             opacity: 0;
-            animation: fadeUp 1s ease forwards;
+            animation: fadeUp 1s ease 0.2s forwards;
+            overflow: hidden; /* Important: keeps banner from leaking out */
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Dynamic Liquid Banner Container & Image */
+        .liquid-banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Behind text, but in the header */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-bg); /* Placeholder background */
+        }
+
+        .liquid-banner img {
+            width: 100%;
+            height: auto;
+            object-fit: contain; /* Keeps its organic shape */
+            opacity: 0.8; /* Subtle transparency for glass integration */
+            /* === Loop UPWARDS drift animation === */
+            animation: loopingUpdrift 25s infinite ease-in-out alternate;
+        }
+
+        @keyframes loopingUpdrift {
+            0% { transform: translateY(15%) scale(1.05); } /* Start slightly below */
+            50% { transform: translateY(0%) scale(1); } /* Float to center */
+            100% { transform: translateY(-15%) scale(1.05); } /* Float upward */
+        }
+
+        /* Standard placeholder text for banner if image is missing */
+        .banner-placeholder-text {
+            color: var(--text-muted);
+            font-size: 14px;
+            padding: 50px 0;
+            z-index: 1; /* Make visible until image loads */
+        }
+
+        /* Style the header content container (the text block) */
+        .header-content {
+            position: relative;
+            z-index: 10; /* Make text sit OVER the banner image */
+            padding: 40px 20px 20px 20px; /* Adjust padding for dynamic move */
+            /* Add pointer-events: none; only if you want no hover interaction on text */
         }
 
         .profile-img {
@@ -138,8 +172,10 @@
             justify-content: center;
             color: var(--text-muted);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* Important: profile pic should allow hover/pointer events */
+            pointer-events: auto;
         }
 
         .profile-img:hover {
@@ -157,8 +193,8 @@
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 8px;
-            /* Gradient Text */
-            background: linear-gradient(90deg, var(--text-main), var(--accent));
+            /* Subtle Iridescent/Shine effect for text */
+            background: linear-gradient(90deg, #fff, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: 200% auto;
@@ -171,8 +207,49 @@
 
         .subtitle {
             font-size: 22px;
-            color: var(--text-muted);
+            color: var(--text-main); /* Pop on dark banner */
             font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        /* === Social Links (Moved to Top) with Icons === */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 0px; /* Reduced to align with subtitle spacing */
+            flex-wrap: wrap; /* Important for mobile */
+            pointer-events: auto; /* Ensure links are clickable */
+        }
+
+        .social-links a {
+            color: #fff; /* High visibility links over dark banner */
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Gap between icon and text */
+        }
+        
+        /* Unique Icons & Hover State for each brand, designed for Dark Mode */
+        .social-links a.mail:hover { background: #dd4b39; color: white; border-color: #dd4b39; }
+        .social-links a.insta:hover { background: #e4405f; color: white; border-color: #e4405f; }
+        /* X and Threads are generally black/white, standard accent works */
+        .social-links a.x:hover, .social-links a.threads:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px var(--accent-glow);
         }
 
         /* === Sections & Cards === */
@@ -263,37 +340,11 @@
             font-weight: bold;
         }
 
-        /* === Links & Footer === */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 60px;
-            padding-top: 30px;
-        }
-
-        .social-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px var(--accent-glow);
-        }
-
+        /* === Footer === */
         footer {
             text-align: center;
             margin-top: 60px;
+            padding-bottom: 40px;
             color: var(--text-muted);
             font-size: 13px;
         }
@@ -307,8 +358,9 @@
             .skills-grid { grid-template-columns: 1fr; }
             .card-header { flex-direction: column; gap: 8px; }
             h1 { font-size: 36px; }
-            .social-links { flex-wrap: wrap; gap: 15px; }
-            .social-links a { flex: 1 1 40%; text-align: center; }
+            .social-links { gap: 8px; }
+            .social-links a { font-size: 13px; padding: 6px 12px; }
+            header { margin-top: 60px;}
         }
     </style>
 </head>
@@ -317,17 +369,39 @@
 <div class="bg-orbs">
     <div class="orb"></div>
     <div class="orb"></div>
+    <div class="orb"></div>
 </div>
-
-<button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+<div class="bg-frost"></div>
 
 <div class="container">
+    
     <header>
-        <div class="profile-img">
-            [Photo]
+        <div class="liquid-banner">
+            <p class="banner-placeholder-text">→ Add your 'banner.jpg' to see the dynamic banner float here ←</p>
         </div>
-        <h1>Your Name</h1>
-        <p class="subtitle">Medical Student & Developer</p>
+
+        <div class="header-content">
+            <div class="profile-img">
+                [Photo]
+            </div>
+            <h1>Your Name</h1>
+            <p class="subtitle">Medical Student & Developer</p>
+            
+            <div class="social-links">
+                <a href="mailto:your.email@email.com" class="mail">
+                    <i class="fas fa-envelope"></i> Mail
+                </a>
+                <a href="https://instagram.com/yourhandle" target="_blank" class="insta">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://x.com/yourhandle" target="_blank" class="x">
+                    <i class="fab fa-x-twitter"></i> X
+                </a>
+                <a href="https://threads.net/@yourhandle" target="_blank" class="threads">
+                    <i class="fab fa-threads"></i> Threads
+                </a>
+            </div>
+        </div>
     </header>
 
     <section class="reveal">
@@ -397,28 +471,12 @@
         </div>
     </section>
 
-    <div class="social-links reveal">
-        <a href="https://github.com/yourhandle" target="_blank">GitHub</a>
-        <a href="https://twitter.com/yourhandle" target="_blank">Twitter</a>
-        <a href="https://instagram.com/yourhandle" target="_blank">Instagram</a>
-    </div>
-
     <footer class="reveal">
         <p>Live long and prosper 🖖 • Designed in Dehradun, Built for the Web.</p>
     </footer>
 </div>
 
 <script>
-    // Theme Toggle Logic
-    function toggleTheme() {
-        const html = document.documentElement;
-        if (html.getAttribute('data-theme') === 'light') {
-            html.setAttribute('data-theme', 'dark');
-        } else {
-            html.setAttribute('data-theme', 'light');
-        }
-    }
-
     // Scroll Reveal Animation Logic
     function reveal() {
         var reveals = document.querySelectorAll(".reveal");
