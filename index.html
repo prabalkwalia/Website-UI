@@ -12,7 +12,7 @@
             --text-main: #f5f5f7;
             --text-muted: #a1a1a6;
             
-            /* UI Gradients matching the uploaded banner */
+            /* Clean UI Gradients */
             --accent-magenta: #ff3399;
             --accent-purple: #9b4dff;
             --accent-orange: #ff9933;
@@ -22,10 +22,10 @@
             --card-bg: rgba(28, 28, 30, 0.6);
             --card-border: rgba(255, 255, 255, 0.08);
             
-            /* Liquid Glass Background Colors */
-            --orb-purple: radial-gradient(circle, rgba(155, 77, 255, 0.3) 0%, rgba(0,0,0,0) 80%);
-            --orb-magenta: radial-gradient(circle, rgba(255, 51, 153, 0.25) 0%, rgba(0,0,0,0) 80%);
-            --orb-orange: radial-gradient(circle, rgba(255, 153, 51, 0.15) 0%, rgba(0,0,0,0) 80%);
+            /* Liquid Glass Background Orbs */
+            --orb-purple: radial-gradient(circle, rgba(155, 77, 255, 0.35) 0%, rgba(0,0,0,0) 80%);
+            --orb-magenta: radial-gradient(circle, rgba(255, 51, 153, 0.3) 0%, rgba(0,0,0,0) 80%);
+            --orb-orange: radial-gradient(circle, rgba(255, 153, 51, 0.2) 0%, rgba(0,0,0,0) 80%);
         }
 
         * {
@@ -42,7 +42,6 @@
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            position: relative;
         }
 
         /* === Highly Diffuse & Fluid Liquid Glass Background === */
@@ -79,19 +78,9 @@
             animation: slowFluidFlow 40s infinite ease-in-out alternate;
         }
 
-        .orb:nth-child(1) {
-            top: -30%; left: -30%; width: 100vw; height: 100vw; background: var(--orb-purple);
-        }
-
-        .orb:nth-child(2) {
-            bottom: -30%; right: -30%; width: 110vw; height: 110vw; background: var(--orb-magenta);
-            animation-delay: -15s;
-        }
-        
-        .orb:nth-child(3) {
-            top: 40%; left: 30%; width: 70vw; height: 70vw; background: var(--orb-orange);
-            animation-delay: -30s;
-        }
+        .orb:nth-child(1) { top: -30%; left: -30%; width: 100vw; height: 100vw; background: var(--orb-purple); }
+        .orb:nth-child(2) { bottom: -30%; right: -30%; width: 110vw; height: 110vw; background: var(--orb-magenta); animation-delay: -15s; }
+        .orb:nth-child(3) { top: 40%; left: 30%; width: 70vw; height: 70vw; background: var(--orb-orange); animation-delay: -30s; }
 
         @keyframes slowFluidFlow {
             0% { transform: translate(0, 0) scale(1) rotate(0deg); }
@@ -99,85 +88,41 @@
             100% { transform: translate(-3%, 8%) scale(1) rotate(-3deg); }
         }
 
-        /* === Layout === */
+        /* === Centered Single-Column Layout === */
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* === Banner-Enabled Header Section === */
+        /* === Header Area === */
         header {
-            position: relative;
-            width: 100%;
             text-align: center;
-            margin-bottom: 70px;
-            margin-top: 20px;
+            margin-bottom: 60px;
             opacity: 0;
             animation: fadeUp 1s ease 0.2s forwards;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
-        .liquid-banner {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--card-bg);
-        }
-
-        .liquid-banner img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            opacity: 0.85;
-            animation: loopingUpdrift 25s infinite ease-in-out alternate;
-        }
-
-        @keyframes loopingUpdrift {
-            0% { transform: translateY(15%) scale(1.05); }
-            50% { transform: translateY(0%) scale(1); }
-            100% { transform: translateY(-15%) scale(1.05); }
-        }
-
-        .banner-placeholder-text {
-            color: var(--text-muted);
-            font-size: 14px;
-            padding: 50px 0;
-            z-index: 1;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 10;
-            padding: 40px 20px 20px 20px;
-        }
-
+        /* === Profile Image (Centered & Non-Interactive) === */
         .profile-img {
-            width: 130px;
-            height: 130px;
+            width: 150px; 
+            height: 150px;
             border-radius: 50%;
             background: var(--card-bg);
-            /* Profile border uses the gradient */
             padding: 3px;
             background: var(--ui-gradient);
             background-size: 300% auto;
             animation: shine 6s linear infinite;
-            margin: 0 auto 24px auto;
+            margin: 0 auto 24px auto; /* Perfectly centers the image */
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 10px 30px var(--accent-glow);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: auto;
+            
+            /* Disabled Interaction */
+            pointer-events: none; 
         }
 
         .profile-inner {
@@ -192,10 +137,6 @@
             color: var(--text-muted);
         }
 
-        .profile-img:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
-
         .profile-img img {
             width: 100%;
             height: 100%;
@@ -207,7 +148,7 @@
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 8px;
-            /* Header text uses the liquid glass gradient */
+            line-height: 1.1;
             background: var(--ui-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -220,34 +161,33 @@
         }
 
         .subtitle {
-            font-size: 22px;
+            font-size: 20px;
             color: var(--text-main);
             font-weight: 400;
-            margin-bottom: 24px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Helps text pop over banner */
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
 
         /* === Social Links === */
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 0px;
             flex-wrap: wrap;
-            pointer-events: auto;
+            gap: 12px;
+            margin-top: 0px;
         }
 
         .social-links a {
             color: #fff;
             text-decoration: none;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 20px;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 12px; 
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--card-border);
             transition: all 0.3s;
-            font-size: 14px;
+            font-size: 15px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -259,11 +199,11 @@
         .social-links a.threads:hover { background: #fff; color: #000; border-color: #fff; }
 
         .social-links a:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px); 
             box-shadow: 0 10px 20px var(--accent-glow);
         }
 
-        /* === Sections & Cards === */
+        /* === Main Content Area === */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -290,15 +230,15 @@
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 24px;
+            border-radius: 24px; 
+            padding: 35px;
+            margin-bottom: 30px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.04);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             box-shadow: 0 15px 40px var(--accent-glow);
             border-color: var(--accent-magenta);
         }
@@ -307,23 +247,22 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             border-bottom: 1px solid var(--card-border);
-            padding-bottom: 12px;
+            padding-bottom: 16px;
         }
 
         .card-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
         }
 
-        /* Dates use the gradient style */
         .card-date {
             font-size: 14px;
             color: #fff;
             font-weight: 500;
             background: linear-gradient(90deg, var(--accent-purple), var(--accent-magenta));
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 20px;
             box-shadow: 0 4px 10px var(--accent-glow);
         }
@@ -339,10 +278,11 @@
         }
 
         li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--text-muted);
             position: relative;
             padding-left: 20px;
+            line-height: 1.6;
         }
 
         li::before {
@@ -356,10 +296,13 @@
         /* === Footer === */
         footer {
             text-align: center;
-            margin-top: 60px;
-            padding-bottom: 40px;
             color: var(--text-muted);
             font-size: 13px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.4s forwards;
+            line-height: 1.6;
+            margin-top: 60px; /* Pushes the footer well below the content */
+            padding-bottom: 40px;
         }
 
         @keyframes fadeUp {
@@ -367,13 +310,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* === Responsive Resizing for Mobile & Tablets === */
         @media (max-width: 600px) {
+            .container { padding: 40px 20px; }
             .skills-grid { grid-template-columns: 1fr; }
             .card-header { flex-direction: column; gap: 8px; }
-            h1 { font-size: 36px; }
-            .social-links { gap: 8px; }
-            .social-links a { font-size: 13px; padding: 6px 12px; }
-            header { margin-top: 60px;}
+            h1 { font-size: 38px; }
+            .social-links { gap: 10px; }
+            .social-links a { font-size: 14px; padding: 8px 16px; }
         }
     </style>
 </head>
@@ -389,106 +333,103 @@
 <div class="container">
     
     <header>
-        <div class="liquid-banner">
-            <p class="banner-placeholder-text">→ Add your 'banner.jpg' to see the dynamic banner float here ←</p>
+        <div class="profile-img">
+            <div class="profile-inner">
+                <img src="profile.jpg" alt="Profile Picture">
+            </div>
         </div>
-
-        <div class="header-content">
-            <div class="profile-img">
-                <div class="profile-inner">
-                    [Photo]
-                </div>
-            </div>
-            <h1>Prabal Kumar Walia</h1>
-            <p class="subtitle">Medical Student & Developer</p>
-            
-            <div class="social-links">
-                <a href="mailto:contact@prabalkwalia.in" class="mail">
-                    <i class="fas fa-envelope"></i> Mail
-                </a>
-                <a href="https://instagram.com/prabalkwalia" target="_blank" class="insta">
-                    <i class="fab fa-instagram"></i> Instagram
-                </a>
-                <a href="https://x.com/prabalkwalia" target="_blank" class="x">
-                    <i class="fab fa-x-twitter"></i> X
-                </a>
-                <a href="https://threads.net/@prabalkwalia" target="_blank" class="threads">
-                    <i class="fab fa-threads"></i> Threads
-                </a>
-            </div>
+        <h1>Prabal Kumar Walia</h1>
+        <p class="subtitle">Medical Student & Developer</p>
+        
+        <div class="social-links">
+            <a href="mailto:contact@prabalkwalia.in" class="mail">
+                <i class="fas fa-envelope"></i> Mail
+            </a>
+            <a href="https://instagram.com/prabalkwalia" target="_blank" class="insta">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://x.com/prabalkwalia" target="_blank" class="x">
+                <i class="fab fa-x-twitter"></i> X
+            </a>
+            <a href="https://threads.net/@prabalkwalia" target="_blank" class="threads">
+                <i class="fab fa-threads"></i> Threads
+            </a>
         </div>
     </header>
 
-    <section class="reveal">
-        <h2>About Me</h2>
-        <div class="card">
-            <p style="color: var(--text-muted);">
-                Bridging the gap between medicine and technology. I am currently navigating my medical studies while cultivating my passion for coding and the tech ecosystem. Whether I'm analyzing clinical data or building clean, user-centric applications, I focus on elegant solutions to complex problems.
-            </p>
-        </div>
-    </section>
-
-    <section class="reveal">
-        <h2>Medical Experience</h2>
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">Doctor of Medicine (MD/MBBS)</span>
-                <span class="card-date">20XX - Present</span>
-            </div>
-            <ul>
-                <li>University / Medical College Name</li>
-                <li>Key rotations or academic achievements</li>
-                <li>Relevant medical research or extracurriculars</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="reveal">
-        <h2>Tech Projects</h2>
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">Health-Tech Application</span>
-                <span class="card-date">20XX</span>
-            </div>
-            <ul>
-                <li>Describe your coding project here.</li>
-                <li>Technologies used: HTML, CSS, JavaScript, etc.</li>
-                <li>Highlight how it solves a problem in the medical field.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="reveal">
-        <h2>Core Competencies</h2>
-        <div class="skills-grid">
+    <main>
+        <section class="reveal">
+            <h2>About Me</h2>
             <div class="card">
-                <div class="card-header" style="border-bottom: none; padding-bottom: 0;">
-                    <span class="card-title">Medical</span>
+                <p style="color: var(--text-muted); font-size: 16px; line-height: 1.7;">
+                    Bridging the gap between medicine and technology. I am currently navigating my medical studies while cultivating my passion for coding and the tech ecosystem. Whether I'm analyzing clinical data or building clean, user-centric applications, I focus on elegant solutions to complex problems.
+                </p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>Medical Experience</h2>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Doctor of Medicine (MD/MBBS)</span>
+                    <span class="card-date">20XX - Present</span>
                 </div>
                 <ul>
-                    <li>Clinical Assessment</li>
-                    <li>Patient Care</li>
-                    <li>Medical Research</li>
-                    <li>Anatomy & Physiology</li>
+                    <li>University / Medical College Name</li>
+                    <li>Key rotations or academic achievements</li>
+                    <li>Relevant medical research or extracurriculars</li>
                 </ul>
             </div>
+        </section>
+
+        <section class="reveal">
+            <h2>Tech Projects</h2>
             <div class="card">
-                <div class="card-header" style="border-bottom: none; padding-bottom: 0;">
-                    <span class="card-title">Technical</span>
+                <div class="card-header">
+                    <span class="card-title">Health-Tech Application</span>
+                    <span class="card-date">20XX</span>
                 </div>
                 <ul>
-                    <li>Web Development</li>
-                    <li>UI/UX Design</li>
-                    <li>Problem Solving</li>
-                    <li>Version Control (Git)</li>
+                    <li>Describe your coding project here.</li>
+                    <li>Technologies used: HTML, CSS, JavaScript, etc.</li>
+                    <li>Highlight how it solves a problem in the medical field.</li>
                 </ul>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="reveal">
+        <section class="reveal">
+            <h2>Core Competencies</h2>
+            <div class="skills-grid">
+                <div class="card">
+                    <div class="card-header" style="border-bottom: none; padding-bottom: 0;">
+                        <span class="card-title">Medical</span>
+                    </div>
+                    <ul>
+                        <li>Clinical Assessment</li>
+                        <li>Patient Care</li>
+                        <li>Medical Research</li>
+                        <li>Anatomy & Physiology</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header" style="border-bottom: none; padding-bottom: 0;">
+                        <span class="card-title">Technical</span>
+                    </div>
+                    <ul>
+                        <li>Web Development</li>
+                        <li>UI/UX Design</li>
+                        <li>Problem Solving</li>
+                        <li>Version Control (Git)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
         <p>Copyright &copy; Prabal Kumar Walia<br>2026 [India]</p>
     </footer>
+
 </div>
 
 <script>
@@ -506,7 +447,7 @@
     }
 
     window.addEventListener("scroll", reveal);
-    reveal();
+    reveal(); // Trigger on load
 </script>
 
 </body>
